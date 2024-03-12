@@ -69,12 +69,13 @@ func main() {
 		panic(err)
 	}
 
+	//
 	var bc conf.Bootstrap
 	if err := c.Scan(&bc); err != nil {
 		panic(err)
 	}
 
-	app, cleanup, err := wireApp(bc.Server, bc.Data, logger)
+	app, cleanup, err := wireApp(bc.Server, bc.Registry, bc.Data, logger)
 	if err != nil {
 		panic(err)
 	}

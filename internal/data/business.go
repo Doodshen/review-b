@@ -26,8 +26,9 @@ func NewBusinessRepo(data *Data, logger log.Logger) biz.BusinessRepo {
 func (r *businessRepo) Reply(ctx context.Context, param *biz.ReplyParam) (int64, error) {
 	r.log.WithContext(ctx).Infof("[data] Reply param:%v", param)
 	//之前是通过查询数据库来创建服务
+
 	//现在需要通过rpc调用其他服务
-	ret, err := r.data.rc.ReplyReview(ctx, &v1.ReplyReviewRequest{ //填写的是review中的v1 也就是review-service定义的v1
+	ret, err := r.data.rc.ReplyReview(ctx, &v1.ReplyReviewRequest{ //填写的是review中的v1 也就是review-service定义的v1 也就是调用这个服务的客户端
 		ReviewID:  param.ReviewID,
 		StoreID:   param.StoreID,
 		Content:   param.Content,
