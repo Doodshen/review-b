@@ -7,7 +7,25 @@ info:
     description: 商家端服务
     version: 0.0.1
 paths:
-    business/v1/review/reply:
+    b/v1/review/appeal:
+        post:
+            tags:
+                - Business
+            operationId: Business_AppealReview
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.business.v1.AppealReviewRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.business.v1.AppealReviewReply'
+    b/v1/review/reply:
         post:
             tags:
                 - Business
@@ -28,6 +46,26 @@ paths:
                                 $ref: '#/components/schemas/api.business.v1.ReplyReviewReply'
 components:
     schemas:
+        api.business.v1.AppealReviewReply:
+            type: object
+            properties:
+                appealID:
+                    type: string
+        api.business.v1.AppealReviewRequest:
+            type: object
+            properties:
+                reviewID:
+                    type: string
+                storeID:
+                    type: string
+                reason:
+                    type: string
+                content:
+                    type: string
+                picInfo:
+                    type: string
+                videoInfo:
+                    type: string
         api.business.v1.ReplyReviewReply:
             type: object
             properties:

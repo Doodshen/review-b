@@ -17,6 +17,7 @@ type ReplyParam struct {
 // BusinessRepo is a Greater repo.
 type BusinessRepo interface {
 	Reply(context.Context, *ReplyParam) (int64, error)
+	CreateAppeal(context.Context, *AppealParam) (int64, error)
 }
 
 // BusinessUsecase is a Greeter usecase.
@@ -35,4 +36,10 @@ func (uc *BusinessUsecase) CreateReply(ctx context.Context, param *ReplyParam) (
 	// replyID,err := uc.repo.Reply(ctx,param) 不使用这样，直接return
 	return uc.repo.Reply(ctx, param)
 
+}
+
+// CreateAppeal 创建申诉
+func (uc *BusinessUsecase) CreateAppeal(ctx context.Context, param *AppealParam) (int64, error) {
+	uc.log.WithContext(ctx).Debugf("[biz] CreateReply param :%v", param)
+	return uc.repo.CreateAppeal(ctx, param)
 }
